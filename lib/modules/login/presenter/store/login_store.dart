@@ -1,11 +1,16 @@
 import 'package:cartao_acessorios/errors/errors.dart';
 import 'package:cartao_acessorios/modules/login/repository/contract/authentication.dart';
+import 'package:cartao_acessorios/modules/login/utils/local_auth/local_auth.dart';
 import 'package:cartao_acessorios/modules/login/utils/shared_preferences.dart/prefs_service.dart';
 import 'package:cartao_acessorios/modules/login/utils/shared_preferences.dart/usuario_shared_model.dart';
 import 'package:flutter/material.dart';
 
 class LoginStore {
   final ValueNotifier<bool> initialState = ValueNotifier<bool>(true);
+
+  // final ValueNotifier<bool> loginInitialState = ValueNotifier<bool>(true);
+
+  // final ValueNotifier<bool> hasFaceId = ValueNotifier<bool>(false);
 
   final ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
 
@@ -22,6 +27,8 @@ class LoginStore {
   getPassword() => _password;
 
   final PrefsService shared = PrefsService();
+
+  final LocalAuthService localAuth = LocalAuthService();
 
   final IAuthenticationRepository authentication;
 
@@ -57,13 +64,28 @@ class LoginStore {
     isLoading.value = false;
   }
 
-  Future getUserShared() async {
+  Future<bool> checkCanAuthomaticLogin() async {
     final usuarioShared = await shared.isAuth();
 
     if (usuarioShared is UserSharedModel) {
-      _email = usuarioShared.email;
-      _password = usuarioShared.password;
-      authenticationEmailAndPassword();
+      // print(await localAuth.isBiometricAvailable());
+      return await localAuth.isBiometricAvailable();
+    } else {
+      return false;
+    }
+  }
+
+  Future getUserShared() async {
+    final bool faceCredential = await localAuth.authenticate();
+
+    if (faceCredential) {
+      final usuarioShared = await shared.isAuth();
+
+      if (usuarioShared is UserSharedModel) {
+        _email = usuarioShared.email;
+        _password = usuarioShared.password;
+        authenticationEmailAndPassword();
+      }
     }
   }
 }

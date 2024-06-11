@@ -5,6 +5,9 @@ import 'package:cartao_acessorios/modules/login/utils/shared_preferences.dart/us
 import 'package:flutter/material.dart';
 
 class SplashStore {
+  String? _email;
+  String? _password;
+
   final ValueNotifier<bool> isLoading = ValueNotifier<bool>(true);
 
   final ValueNotifier<String> error = ValueNotifier<String>('');
@@ -18,27 +21,41 @@ class SplashStore {
   SplashStore({required this.authentication});
 
   Future authenticationEmailAndPassword() async {
-    final usuarioShared = await shared.isAuth();
+    if (_email == null || _email!.length < 5 || !_email!.contains("@")) {
+      error.value = 'Email inválido';
+    } else if (_password == null || _password!.length < 8) {
+      error.value = 'senha inválida: $_password';
+    } else {
+      // isLoading.value = true;
 
-    if (usuarioShared is UserSharedModel) {
-      print(usuarioShared.email);
-      print(usuarioShared.password);
       try {
         final result = await authentication.authEmailAndPassword(
-            email: usuarioShared.email, password: usuarioShared.password);
+            email: _email!, password: _password!);
 
+        // await shared.save(_email!, _password!);
         success.value = result;
         error.value = '';
       } on DatasourceError catch (e) {
         error.value = e.message;
+        // print(error.value);
       } on RepositoryError catch (e) {
         error.value = e.message;
       } catch (e) {
         error.value = e.toString();
+        // print(error.value);
       }
-    } else {
-      isLoading.value = false;
-      error.value = 'sem usuário';
+    }
+
+    isLoading.value = false;
+  }
+
+  Future getUserShared() async {
+    final usuarioShared = await shared.isAuth();
+
+    if (usuarioShared is UserSharedModel) {
+      _email = usuarioShared.email;
+      _password = usuarioShared.password;
+      authenticationEmailAndPassword();
     }
   }
 }

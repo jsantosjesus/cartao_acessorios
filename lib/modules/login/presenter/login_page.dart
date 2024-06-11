@@ -18,6 +18,20 @@ class _LoginPageState extends State<LoginPage> {
     ),
   );
 
+  bool checkAutoLogin = false;
+
+  void checkLogin() async {
+    checkAutoLogin = await store.checkCanAuthomaticLogin();
+    // print(checkAutoLogin);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkLogin();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,12 +57,6 @@ class _LoginPageState extends State<LoginPage> {
               store.authenticationEmailAndPassword();
             },
             child: const Text('Entrar'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              store.getUserShared();
-            },
-            child: const Text('usar faceId'),
           ),
           AnimatedBuilder(
             animation: Listenable.merge([
@@ -79,7 +87,13 @@ class _LoginPageState extends State<LoginPage> {
                 );
               }
             }),
-          )
+          ),
+          if (checkAutoLogin)
+            ElevatedButton(
+                onPressed: () {
+                  store.getUserShared();
+                },
+                child: const Text('Entrar com senha'))
         ],
       ),
     );

@@ -44,9 +44,9 @@ class _SplashPageState extends State<SplashPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        store.authenticationEmailAndPassword();
+                        store.getUserShared();
                       },
-                      child: Text('usar faceId'),
+                      child: const Text('usar faceId'),
                     ),
                   ],
                 ),
