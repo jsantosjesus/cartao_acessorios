@@ -17,3 +17,10 @@ class RepositoryError implements Error {
 
   RepositoryError({required this.message});
 }
+
+class SharedPreferencesError implements Error {
+  @override
+  final String message;
+
+  SharedPreferencesError({required this.message});
+}

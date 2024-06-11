@@ -1,5 +1,5 @@
 import 'package:cartao_acessorios/errors/errors.dart';
-import 'package:cartao_acessorios/modules/login/models/user_model.dart';
+import 'package:cartao_acessorios/modules/get_user_home/models/user_model.dart';
 import 'package:cartao_acessorios/request_documents/contract/params_request.dart';
 import 'package:cartao_acessorios/request_documents/contract/request_documents.dart';
 
