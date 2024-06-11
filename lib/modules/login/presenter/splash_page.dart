@@ -1,3 +1,4 @@
+import 'package:cartao_acessorios/modules/login/presenter/login_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -8,8 +9,21 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    if (loading) {
+      return Container(
+        color: Colors.black26,
+        child: const Center(
+          child: CircularProgressIndicator(
+            color: Colors.yellowAccent,
+          ),
+        ),
+      );
+    } else {
+      return const LoginPage();
+    }
   }
 }
