@@ -1,16 +1,11 @@
 import 'package:cartao_acessorios/errors/errors.dart';
 import 'package:cartao_acessorios/modules/login/repository/contract/authentication.dart';
 import 'package:cartao_acessorios/modules/login/utils/local_auth/local_auth.dart';
-import 'package:cartao_acessorios/modules/login/utils/shared_preferences.dart/prefs_service.dart';
-import 'package:cartao_acessorios/modules/login/utils/shared_preferences.dart/usuario_shared_model.dart';
+import 'package:cartao_acessorios/modules/login/utils/salve_storage/contract/storage_user.dart';
 import 'package:flutter/material.dart';
 
 class LoginStore {
   final ValueNotifier<bool> initialState = ValueNotifier<bool>(true);
-
-  // final ValueNotifier<bool> loginInitialState = ValueNotifier<bool>(true);
-
-  // final ValueNotifier<bool> hasFaceId = ValueNotifier<bool>(false);
 
   final ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
 
@@ -26,13 +21,13 @@ class LoginStore {
   setPassword(String value) => _password = value;
   getPassword() => _password;
 
-  final PrefsService shared = PrefsService();
+  final IStorageUser storage;
 
   final LocalAuthService localAuth = LocalAuthService();
 
   final IAuthenticationRepository authentication;
 
-  LoginStore({required this.authentication});
+  LoginStore({required this.authentication, required this.storage});
 
   Future authenticationEmailAndPassword() async {
     initialState.value = false;
@@ -47,7 +42,7 @@ class LoginStore {
         final result = await authentication.authEmailAndPassword(
             email: _email!, password: _password!);
 
-        await shared.save(_email!, _password!);
+        await storage.setUserStorage(email: _email!, password: _password!);
         success.value = result;
         error.value = '';
       } on DatasourceError catch (e) {
@@ -65,9 +60,9 @@ class LoginStore {
   }
 
   Future<bool> checkCanAuthomaticLogin() async {
-    final usuarioShared = await shared.isAuth();
+    final usuarioStorage = await storage.getUserStorage();
 
-    if (usuarioShared is UserSharedModel) {
+    if (usuarioStorage.email.isNotEmpty && usuarioStorage.password.isNotEmpty) {
       // print(await localAuth.isBiometricAvailable());
       return await localAuth.isBiometricAvailable();
     } else {
@@ -75,15 +70,16 @@ class LoginStore {
     }
   }
 
-  Future getUserShared() async {
+  Future getUserStorage() async {
     final bool faceCredential = await localAuth.authenticate();
 
     if (faceCredential) {
-      final usuarioShared = await shared.isAuth();
+      final usuarioStorage = await storage.getUserStorage();
 
-      if (usuarioShared is UserSharedModel) {
-        _email = usuarioShared.email;
-        _password = usuarioShared.password;
+      if (usuarioStorage.email.isNotEmpty &&
+          usuarioStorage.password.isNotEmpty) {
+        _email = usuarioStorage.email;
+        _password = usuarioStorage.password;
         authenticationEmailAndPassword();
       }
     }
