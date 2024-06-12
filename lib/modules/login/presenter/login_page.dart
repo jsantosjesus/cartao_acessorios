@@ -80,8 +80,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(store.error.value),
                 );
               } else if (store.success.value.isNotEmpty) {
+                final String uid = store.success.value;
                 Future.delayed(Duration.zero, () {
-                  context.go('/home');
+                  context.go('/home/$uid');
                 });
                 return const Center();
               } else {

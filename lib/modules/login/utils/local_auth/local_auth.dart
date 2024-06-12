@@ -19,12 +19,9 @@ class LocalAuthService {
   }
 
   Future<bool> authenticate() async {
-    final bool aut = await auth.authenticate(
+    return await auth.authenticate(
       localizedReason: 'Por favor, autentique-se para acessar o app.',
       options: const AuthenticationOptions(biometricOnly: false),
     );
-    print(aut);
-
-    return aut;
   }
 }
