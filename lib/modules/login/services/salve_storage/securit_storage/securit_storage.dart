@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:cartao_acessorios/modules/login/utils/salve_storage/contract/storage_user.dart';
-import 'package:cartao_acessorios/modules/login/utils/salve_storage/contract/usuario_storage_model.dart';
+import 'package:cartao_acessorios/modules/login/services/salve_storage/contract/storage_user.dart';
+import 'package:cartao_acessorios/modules/login/services/salve_storage/contract/usuario_storage_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecuritStorage extends IStorageUser {

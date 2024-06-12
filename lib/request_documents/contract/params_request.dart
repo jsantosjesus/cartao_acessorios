@@ -3,7 +3,7 @@ class IParamsRequest {
   final String? token;
   final String collection;
   final String? document;
-  final String? where;
+  final Map<String, String>? where;
 
   IParamsRequest(
       {this.url,

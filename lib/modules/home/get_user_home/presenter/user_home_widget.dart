@@ -38,8 +38,16 @@ class _UserHomeWidgetState extends State<UserHomeWidget> {
           );
         } else {
           return AppBar(
+            leading: const Padding(
+              padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://avatars.githubusercontent.com/u/122129093?v=4'),
+              ),
+            ),
             title: Text('Olá, ${store.success.value.nome}'),
-            titleTextStyle: const TextStyle(fontSize: 10.0),
+            titleTextStyle:
+                const TextStyle(fontSize: 20.0, color: Colors.black),
           );
         }
       }),

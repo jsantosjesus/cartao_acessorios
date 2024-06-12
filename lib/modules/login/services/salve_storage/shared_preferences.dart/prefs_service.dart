@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:cartao_acessorios/modules/login/utils/salve_storage/contract/storage_user.dart';
-import 'package:cartao_acessorios/modules/login/utils/salve_storage/contract/usuario_storage_model.dart';
+import 'package:cartao_acessorios/modules/login/services/salve_storage/contract/storage_user.dart';
+import 'package:cartao_acessorios/modules/login/services/salve_storage/contract/usuario_storage_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefsService implements IStorageUser {

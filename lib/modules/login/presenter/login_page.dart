@@ -1,7 +1,7 @@
 import 'package:cartao_acessorios/modules/login/datasource/firebase_authentication_datasource.dart';
 import 'package:cartao_acessorios/modules/login/presenter/store/login_store.dart';
 import 'package:cartao_acessorios/modules/login/repository/firebase_authentication_repository.dart';
-import 'package:cartao_acessorios/modules/login/utils/salve_storage/securit_storage/securit_storage.dart';
+import 'package:cartao_acessorios/modules/login/services/salve_storage/securit_storage/securit_storage.dart';
 // import 'package:cartao_acessorios/modules/login/utils/salve_storage/shared_preferences.dart/prefs_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

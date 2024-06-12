@@ -1,7 +1,7 @@
 import 'package:cartao_acessorios/errors/errors.dart';
 import 'package:cartao_acessorios/modules/login/repository/contract/authentication.dart';
-import 'package:cartao_acessorios/modules/login/utils/local_auth/local_auth.dart';
-import 'package:cartao_acessorios/modules/login/utils/salve_storage/contract/storage_user.dart';
+import 'package:cartao_acessorios/modules/login/services/local_auth/local_auth.dart';
+import 'package:cartao_acessorios/modules/login/services/salve_storage/contract/storage_user.dart';
 import 'package:flutter/material.dart';
 
 class LoginStore {
