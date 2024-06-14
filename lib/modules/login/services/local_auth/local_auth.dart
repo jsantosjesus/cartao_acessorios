@@ -9,8 +9,6 @@ class LocalAuthService {
     final List<BiometricType> availableBiometrics =
         await auth.getAvailableBiometrics();
 
-    print(availableBiometrics.isNotEmpty);
-
     if (availableBiometrics.isNotEmpty) {
       return canAuthenticateWithBiometrics || await auth.isDeviceSupported();
     } else {
