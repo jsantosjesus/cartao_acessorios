@@ -12,8 +12,8 @@ class GetFaturasRepositoryImpl implements IGetFaturasRepository {
   GetFaturasRepositoryImpl({required this.request});
   @override
   Future<List<FaturaModel>> getFaturas({required String userId}) async {
-    final result = await request.get(IParamsRequest(
-        collection: 'usuario', document: userId, subcollection: 'fatura'));
+    final result = await request
+        .get(IParamsRequest(collection: 'fatura', where: {'userId': userId}));
 
     final List<FaturaModel> listFaturas = [];
 

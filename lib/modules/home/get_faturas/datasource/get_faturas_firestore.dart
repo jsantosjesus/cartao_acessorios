@@ -11,8 +11,10 @@ class GetFaturasFirestore implements IRequestSeveralDocuments {
     try {
       final docRef = await db
           .collection(params.collection)
-          .doc(params.document)
-          .collection(params.subcollection!)
+          .where('userId', isEqualTo: params.where!['userId'])
+          .where('total', isGreaterThan: 0)
+          .orderBy('total')
+          .orderBy('dataVencimento')
           .get();
 
       final List<IResponseResquest> listFaturas = [];
@@ -28,6 +30,7 @@ class GetFaturasFirestore implements IRequestSeveralDocuments {
         throw DatasourceError(message: 'lista vazia');
       }
     } catch (e) {
+      print(e.toString());
       throw DatasourceError(message: e.toString());
     }
   }

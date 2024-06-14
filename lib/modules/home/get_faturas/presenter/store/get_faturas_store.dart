@@ -1,5 +1,5 @@
 import 'package:cartao_acessorios/errors/errors.dart';
-import 'package:cartao_acessorios/modules/home/controller/chonsen_fatura_store.dart';
+// import 'package:cartao_acessorios/modules/home/controller/chonsen_fatura_store.dart';
 import 'package:cartao_acessorios/modules/home/get_faturas/models/fatura_model.dart';
 import 'package:cartao_acessorios/modules/home/get_faturas/repository/get_faturas_repository.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class GetFaturasStore {
   final ValueNotifier<List<FaturaModel>> success =
       ValueNotifier<List<FaturaModel>>([]);
 
-  final ChosenFaturasStore faturaChosen = ChosenFaturasStore();
+  // final ChosenFaturasStore faturaChosen = ChosenFaturasStore();
 
   final IGetFaturasRepository repository;
 
@@ -22,16 +22,16 @@ class GetFaturasStore {
     try {
       final result = await repository.getFaturas(userId: userId);
 
-      if (faturaChosen.fatura.value.isEmpty) {
-        print('está vazio');
-        final int mesAgora = DateTime.now().month;
+      // if (faturaChosen.fatura.value.isEmpty) {
+      //   print('está vazio');
+      //   final int mesAgora = await DateTime.now().month;
 
-        FaturaModel faturadoMes =
-            result.firstWhere((map) => map.dataVencimento.month == mesAgora);
+      //   FaturaModel faturadoMes = await result
+      //       .firstWhere((map) => map.dataVencimento.month == mesAgora);
 
-        faturaChosen.setFatura(faturaId: faturadoMes.id);
-        print(faturaChosen.fatura.value);
-      }
+      //   faturaChosen.setFatura(faturaId: faturadoMes.id);
+      //   // print(faturaChosen.fatura.value);
+      // }
 
       success.value = result;
     } on DatasourceError catch (e) {

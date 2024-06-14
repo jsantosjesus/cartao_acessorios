@@ -23,7 +23,14 @@ class _ListFaturasWidgetState extends State<ListFaturasWidget> {
   void initState() {
     super.initState();
 
-    store.getFaturas(userId: widget.userId);
+    store.getFaturas(userId: widget.userId).then((_) {
+      if (faturaChosen.fatura.value.isEmpty) {
+        final mesAgora = DateTime.now().month;
+        final faturadoMes = store.success.value
+            .firstWhere((map) => map.dataVencimento.month == mesAgora);
+        faturaChosen.setFatura(faturaId: faturadoMes.id);
+      }
+    });
   }
 
   @override
@@ -51,7 +58,9 @@ class _ListFaturasWidgetState extends State<ListFaturasWidget> {
                   final mes = changeMounth(
                       mes: fatura.dataVencimento.month,
                       ano: fatura.dataVencimento.year);
+                  // print(faturaChosen.fatura.value);
                   if (faturaChosen.fatura.value == fatura.id) {
+                    // print(faturaChosen.fatura.value);
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: GestureDetector(
