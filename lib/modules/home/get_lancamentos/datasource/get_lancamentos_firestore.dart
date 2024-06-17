@@ -4,32 +4,32 @@ import 'package:cartao_acessorios/request_documents/contract/request_documents.d
 import 'package:cartao_acessorios/request_documents/contract/response_request.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class GetFaturasFirestore implements IRequestSeveralDocuments {
+class GetLancamentosFirestore implements IRequestSeveralDocuments {
   FirebaseFirestore db = FirebaseFirestore.instance;
   @override
   Future<List<IResponseResquest>> get(IParamsRequest params) async {
     try {
       final docRef = await db
           .collection(params.collection)
-          .where('userId', isEqualTo: params.where!['userId'])
-          .where('total', isGreaterThan: 0)
-          .orderBy('total')
-          .orderBy('dataVencimento')
+          .where('faturaId', isEqualTo: params.where!['faturaId'])
           .get();
 
-      final List<IResponseResquest> listFaturas = [];
+      final List<IResponseResquest> listLancamentos = [];
       for (var docSnapshot in docRef.docs) {
-        final IResponseResquest fatura =
+        // print(docSnapshot.data());
+        final IResponseResquest lancamento =
             IResponseResquest(id: docSnapshot.id, data: docSnapshot.data());
-        listFaturas.add(fatura);
+        listLancamentos.add(lancamento);
       }
 
-      if (listFaturas.isNotEmpty) {
-        return listFaturas;
+      if (listLancamentos.isNotEmpty) {
+        // print(listLancamentos[0].id);
+        return listLancamentos;
       } else {
         throw DatasourceError(message: 'lista vazia');
       }
     } catch (e) {
+      print(e.toString());
       throw DatasourceError(message: e.toString());
     }
   }
