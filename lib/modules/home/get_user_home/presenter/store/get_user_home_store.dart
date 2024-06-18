@@ -11,6 +11,7 @@ class GetUserHomeStore {
   final ValueNotifier<UserModel> success = ValueNotifier<UserModel>(
     UserModel(
       uid: '',
+      img: '',
       nome: '',
       cpf: '',
       email: '',
@@ -20,7 +21,8 @@ class GetUserHomeStore {
           limite: 0,
           limiteGasto: 0,
           dataFechamento: 0,
-          dataVencimento: 0),
+          dataVencimento: 0,
+          numero: ''),
     ),
   );
 

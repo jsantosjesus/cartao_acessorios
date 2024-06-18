@@ -21,7 +21,7 @@ class LancamentosStore {
       final result = await repository.getLancamento(faturaId: faturaId);
 
       success.value = result;
-      print(success.value[0].descricao);
+      // print(success.value[0].descricao);
     } on DatasourceError catch (e) {
       error.value = e.message;
     } catch (e) {

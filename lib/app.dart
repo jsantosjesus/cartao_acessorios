@@ -7,10 +7,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        // color: Color(0XFF1F1F1F),
         debugShowCheckedModeBanner: false,
         title: 'Cartão Acessorios',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellowAccent),
+          // primaryColor: Color(0XFF1F1F1F),
+          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellowAccent),
           useMaterial3: true,
         ),
         home: MaterialApp.router(

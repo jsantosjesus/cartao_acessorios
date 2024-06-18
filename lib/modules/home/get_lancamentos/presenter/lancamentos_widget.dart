@@ -1,3 +1,4 @@
+import 'package:cartao_acessorios/modules/home/get_lancamentos/presenter/utils/rewrite_date_lancamento.dart';
 import 'package:flutter/material.dart';
 import 'package:cartao_acessorios/modules/home/get_lancamentos/datasource/get_lancamentos_firestore.dart';
 import 'package:cartao_acessorios/modules/home/get_lancamentos/presenter/store/lancamentos_store.dart';
@@ -48,7 +49,9 @@ class _LancamentosWidgetState extends State<LancamentosWidget> {
       builder: ((context, child) {
         if (store.isLoading.value) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
           );
         } else if (store.error.value.isNotEmpty) {
           return Center(
@@ -59,11 +62,35 @@ class _LancamentosWidgetState extends State<LancamentosWidget> {
             itemCount: store.success.value.length,
             itemBuilder: (_, id) {
               final lancamento = store.success.value[id];
+              final data = rewriteDateLancamento(data: lancamento.data);
               return ListTile(
-                leading: CircleAvatar(
-                  child: Text(lancamento.descricao[0]),
+                leading: Container(
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF3B3B3B),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(
+                    lancamento.isDebito ? Icons.shop_two : Icons.payment,
+                    color: Colors.white,
+                  ),
                 ),
-                title: Text(lancamento.descricao),
+                title: Text(
+                  lancamento.descricao,
+                  style: const TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  data,
+                  style: const TextStyle(color: Color(0xFF8A8A8A)),
+                ),
+                trailing: Text(
+                  'R\$ ${lancamento.valor.toStringAsFixed(2)}',
+                  style: TextStyle(
+                      color: lancamento.isDebito ? Colors.red : Colors.green,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold),
+                ),
               );
             },
           );

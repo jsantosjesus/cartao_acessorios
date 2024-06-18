@@ -53,11 +53,16 @@ class _ListFaturasWidgetState extends State<ListFaturasWidget> {
           builder: ((context, child) {
             if (store.isLoading.value) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
               );
             } else if (store.error.value.isNotEmpty) {
               return Center(
-                child: Text(store.error.value),
+                child: Text(
+                  store.error.value,
+                  style: const TextStyle(color: Colors.white),
+                ),
               );
             } else {
               return SizedBox(
@@ -82,13 +87,17 @@ class _ListFaturasWidgetState extends State<ListFaturasWidget> {
                             border: Border(
                               bottom: BorderSide(
                                 color: faturaChosen.fatura.value == fatura.id
-                                    ? Colors.black
+                                    ? Colors.white
                                     : Colors.transparent,
                                 width: 3.0,
                               ),
                             ),
                           ),
-                          child: Center(child: Text(mes)),
+                          child: Center(
+                              child: Text(
+                            mes,
+                            style: const TextStyle(color: Colors.white),
+                          )),
                         ),
                       ),
                     );
