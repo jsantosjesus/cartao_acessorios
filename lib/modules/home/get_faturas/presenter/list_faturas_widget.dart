@@ -28,13 +28,13 @@ class _ListFaturasWidgetState extends State<ListFaturasWidget> {
     super.initState();
 
     store.getFaturas(userId: widget.userId).then((_) {
-      if (faturaChosen.fatura.value.isEmpty) {
+      if (faturaChosen.fatura.value.id.isEmpty) {
         final mesAgora = DateTime.now().month;
         final faturadoMes = store.success.value.firstWhere(
           (map) => map.dataVencimento.month == mesAgora,
         );
         setState(() {
-          faturaChosen.setFatura(faturaId: faturadoMes.id);
+          faturaChosen.setFatura(faturaId: faturadoMes);
 
           hasIdFatura = true;
         });
@@ -84,13 +84,13 @@ class _ListFaturasWidgetState extends State<ListFaturasWidget> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: GestureDetector(
                         onTap: () {
-                          faturaChosen.setFatura(faturaId: fatura.id);
+                          faturaChosen.setFatura(faturaId: fatura);
                         },
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
-                                color: faturaChosen.fatura.value == fatura.id
+                                color: faturaChosen.fatura.value.id == fatura.id
                                     ? Colors.white
                                     : Colors.transparent,
                                 width: 3.0,
