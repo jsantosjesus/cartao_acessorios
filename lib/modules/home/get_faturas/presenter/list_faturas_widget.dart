@@ -1,3 +1,4 @@
+import 'package:cartao_acessorios/global_styles_config/styles_global.dart';
 import 'package:cartao_acessorios/modules/home/controller/chonsen_fatura_store.dart';
 import 'package:flutter/material.dart';
 import 'package:cartao_acessorios/modules/home/get_faturas/datasource/get_faturas_firestore.dart';
@@ -61,7 +62,10 @@ class _ListFaturasWidgetState extends State<ListFaturasWidget> {
               return Center(
                 child: Text(
                   store.error.value,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontFamily: fontGlobal,
+                  ),
                 ),
               );
             } else {
@@ -96,7 +100,10 @@ class _ListFaturasWidgetState extends State<ListFaturasWidget> {
                           child: Center(
                               child: Text(
                             mes,
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontFamily: fontGlobal,
+                            ),
                           )),
                         ),
                       ),

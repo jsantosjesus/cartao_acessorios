@@ -10,13 +10,7 @@ final routes = GoRouter(routes: [
     ),
   ),
   GoRoute(
-    path: '/login',
+    path: '/',
     builder: (context, state) => const LoginPage(),
   ),
-  GoRoute(
-    path: '/',
-    builder: (context, state) => const HomePage(
-      uid: 'Zo5szZw2uIXjEiNTc9PhKADmiq92',
-    ),
-  )
 ]);

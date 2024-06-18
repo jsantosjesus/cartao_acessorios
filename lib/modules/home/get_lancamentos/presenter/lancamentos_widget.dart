@@ -1,3 +1,4 @@
+import 'package:cartao_acessorios/global_styles_config/styles_global.dart';
 import 'package:cartao_acessorios/modules/home/get_lancamentos/presenter/utils/rewrite_date_lancamento.dart';
 import 'package:flutter/material.dart';
 import 'package:cartao_acessorios/modules/home/get_lancamentos/datasource/get_lancamentos_firestore.dart';
@@ -55,7 +56,10 @@ class _LancamentosWidgetState extends State<LancamentosWidget> {
           );
         } else if (store.error.value.isNotEmpty) {
           return Center(
-            child: Text(store.error.value),
+            child: Text(
+              store.error.value,
+              style: const TextStyle(fontFamily: fontGlobal),
+            ),
           );
         } else {
           return ListView.builder(
@@ -78,18 +82,32 @@ class _LancamentosWidgetState extends State<LancamentosWidget> {
                 ),
                 title: Text(
                   lancamento.descricao,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                      color: Colors.white, fontFamily: fontGlobal),
                 ),
                 subtitle: Text(
                   data,
-                  style: const TextStyle(color: Color(0xFF8A8A8A)),
+                  style: const TextStyle(
+                      color: Color(0xFF8A8A8A), fontFamily: fontGlobal),
                 ),
-                trailing: Text(
-                  'R\$ ${lancamento.valor.toStringAsFixed(2)}',
-                  style: TextStyle(
-                      color: lancamento.isDebito ? Colors.red : Colors.green,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold),
+                trailing: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'R\$ ${lancamento.valor.toStringAsFixed(2)}',
+                      style: TextStyle(
+                          color:
+                              lancamento.isDebito ? Colors.red : Colors.green,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: fontGlobal),
+                    ),
+                    if (lancamento.parcela != null)
+                      Text(
+                        'Parcela ${lancamento.parcela!}',
+                        style: const TextStyle(fontFamily: fontGlobal),
+                      )
+                  ],
                 ),
               );
             },

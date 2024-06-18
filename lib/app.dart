@@ -11,8 +11,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Cartão Acessorios',
         theme: ThemeData(
-          // primaryColor: Color(0XFF1F1F1F),
-          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellowAccent),
+          // textTheme: const TextTheme(
+          //     // bodyText1: TextStyle(fontFamily: 'Poppins'),
+          //     // bodyText2: TextStyle(fontFamily: 'Poppins'),
+          //     ),
           useMaterial3: true,
         ),
         home: MaterialApp.router(

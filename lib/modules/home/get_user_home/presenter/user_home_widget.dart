@@ -1,3 +1,4 @@
+import 'package:cartao_acessorios/global_styles_config/styles_global.dart';
 import 'package:cartao_acessorios/modules/home/get_user_home/datasource/get_user_firestore.dart';
 import 'package:cartao_acessorios/modules/home/get_user_home/models/user_model.dart';
 import 'package:cartao_acessorios/modules/home/get_user_home/presenter/store/get_user_home_store.dart';
@@ -42,7 +43,7 @@ class _UserHomeWidgetState extends State<UserHomeWidget> {
             return const Center(
               child: Text(
                 'Ocorreu um erro!',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white, fontFamily: fontGlobal),
               ),
             );
           } else {
@@ -60,15 +61,18 @@ class _UserHomeWidgetState extends State<UserHomeWidget> {
                         children: [
                           const Text(
                             'É bom te ver novamente,',
-                            style:
-                                TextStyle(fontSize: 14.0, color: Colors.white),
+                            style: TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.white,
+                                fontFamily: fontGlobal),
                           ),
                           Text(
                             user.nome,
                             style: const TextStyle(
                                 fontSize: 24.0,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold,
+                                fontFamily: fontGlobal),
                           )
                         ],
                       ),
@@ -104,12 +108,17 @@ class _UserHomeWidgetState extends State<UserHomeWidget> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.only(top: 20, left: 20),
-                        child: Text('Limite disponível:'),
+                        child: Text(
+                          'Limite disponível:',
+                          style: TextStyle(fontFamily: fontGlobal),
+                        ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 180),
+                        padding: const EdgeInsets.only(left: 160),
                         child: Text(
-                            'R\$ ${(user.cartao.limite - user.cartao.limiteGasto).toStringAsFixed(2).replaceAll('.', ',')} de R\$ ${(user.cartao.limite).toStringAsFixed(2).replaceAll('.', ',')}'),
+                          'R\$ ${(user.cartao.limite - user.cartao.limiteGasto).toStringAsFixed(2).replaceAll('.', ',')} de R\$ ${(user.cartao.limite).toStringAsFixed(2).replaceAll('.', ',')}',
+                          style: const TextStyle(fontFamily: fontGlobal),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
@@ -127,6 +136,7 @@ class _UserHomeWidgetState extends State<UserHomeWidget> {
                           style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
+                            fontFamily: fontGlobal,
                           ),
                         ),
                       ),
@@ -134,7 +144,10 @@ class _UserHomeWidgetState extends State<UserHomeWidget> {
                         padding: const EdgeInsets.only(top: 12, left: 20),
                         child: Text(
                           user.cartao.nomeImpresso,
-                          style: const TextStyle(fontSize: 18),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontFamily: fontGlobal,
+                          ),
                         ),
                       ),
                     ],

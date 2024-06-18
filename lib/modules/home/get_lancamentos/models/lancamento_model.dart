@@ -4,6 +4,7 @@ class LancamentoModel {
   final String id;
   final String faturaId;
   final String? compraId;
+  final String? parcela;
   final String descricao;
   final DateTime data;
   final double valor;
@@ -13,6 +14,7 @@ class LancamentoModel {
       {required this.id,
       required this.faturaId,
       this.compraId,
+      this.parcela,
       required this.descricao,
       required this.data,
       required this.valor,
@@ -24,7 +26,8 @@ class LancamentoModel {
     return LancamentoModel(
       id: id,
       faturaId: map['faturaId'] as String,
-      // compraId: map['compraId'] != null ? map['compraId'] as String : null,
+      compraId: map['compraId'] != null ? map['compraId'] as String : null,
+      parcela: map['parcela'] != null ? map['parcela'] as String : null,
       descricao: map['descricao'] as String,
       data: timestampData.toDate(),
       valor: map['valor'] * 1.0,
