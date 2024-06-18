@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:cartao_acessorios/modules/home/get_lancamentos/datasource/get_lancamentos_firestore.dart';
 import 'package:cartao_acessorios/modules/home/get_lancamentos/presenter/store/lancamentos_store.dart';
 import 'package:cartao_acessorios/modules/home/get_lancamentos/repository/get_lancamentos_repository.dart';
+import 'package:go_router/go_router.dart';
 
 class LancamentosWidget extends StatefulWidget {
   final ValueNotifier<FaturaModel> faturaNotifier;
@@ -76,6 +77,11 @@ class _LancamentosWidgetState extends State<LancamentosWidget> {
                     final lancamento = store.success.value[id];
                     final data = rewriteDateLancamento(data: lancamento.data);
                     return ListTile(
+                      onTap: () {
+                        if (lancamento.compraId != null) {
+                          context.push('/compra/${lancamento.compraId}');
+                        }
+                      },
                       leading: Container(
                         height: 40,
                         width: 40,
